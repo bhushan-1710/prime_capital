@@ -1,26 +1,1108 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@source "../components";
+@source "../app";
+
+/* ============================================================
+   PRIME CAPITAL PARTNERS — CREDIX FINTECH DESIGN SYSTEM
+   Faithful to "Credix" design specification (design (1).md)
+   ============================================================ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Hero Photo Layer (design (1).md Section 2) ── */
+  --sky-top:          #7C8BB1;
+  --sky-mid:          #647DAC;
+  --sky-bottom:       #D9E1ED;
+  --hero-text:        #FFFFFF;
+  --hero-text-muted:  rgba(255,255,255,0.82);
+  --glass-pill:       rgba(255,255,255,0.90);
+
+  /* ── Light Sections (design (1).md Section 2) ── */
+  --bg-page:          #F5F4FC;
+  --bg-card:          #FFFFFF;
+  --text-heading:     #2E2E48;
+  --text-body:        #7C7C93;
+  --text-label:       #9A9AB0;
+  --badge-bg:         #DDE8FF;
+  --badge-text:       #2E2E48;
+  --icon-navy:        #232946;
+  --icon-lavender-bg: #E4E8FB;
+  --card-gradient-start: #C4CCEF;
+  --card-gradient-end:   #EDEFFB;
+  --border-hairline:  #E9E9F3;
+
+  /* ── Legacy tokens (backward compat) ── */
+  --bg-canvas:      #F5F4FC;
+  --card-light:     #E0E7F9;
+  --card-dark:      #2D3157;
+  --ink-900:        #232742;
+  --ink-700:        #4B5170;
+  --ink-inverse:    #F5F4FC;
+  --accent-blue:    #5A78D6;
+  --white:          #FFFFFF;
+  --white-pill:     rgba(255, 255, 255, 0.94);
+
+  /* ── Shape (design (1).md Section 4) ── */
+  --radius-sm:      10px;
+  --radius-md:      20px;
+  --radius-pill:    999px;
+  --radius-card:    24px;
+  --radius-section: 28px;
+
+  /* ── Elevation (design (1).md Section 4) ── */
+  --shadow-soft:    0 20px 60px rgba(30,30,60,0.08);
+  --shadow-card:    0 10px 32px -8px rgba(35, 39, 66, 0.08);
+  --shadow-hover:   0 24px 48px -12px rgba(35, 39, 66, 0.18);
+  --shadow-pill:    0 8px 30px rgba(35, 39, 66, 0.1);
+
+  /* ── Motion Curves (design (1).md Section 8) ── */
+  --ease-soft:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:       200ms;
+  --dur-base:       600ms;
+
+  /* ── Typography (design (1).md Section 3) ── */
+  --font-heading:   'Plus Jakarta Sans', 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:      'Plus Jakarta Sans', 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ── Layout ── */
+  --container-width: min(88%, 1200px);
+  --container-max:   1200px;
+  --section-pad:     clamp(64px, 6.5vw, 84px);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Reset & Baseline ── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-heading);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::selection {
+  background-color: var(--card-dark);
+  color: var(--ink-inverse);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.sky-display, .sky-h2, .sky-h3, .sky-stat-number, .sky-eyebrow {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+p, span, input, textarea, button, .sky-body, .sky-small {
+  font-family: var(--font-body);
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+/* ============================================================
+   CONTAINER
+   Centered, ~1200px max (design (1).md Section 4: ~1200px)
+   ============================================================ */
+.sky-container {
+  width: var(--container-width);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+/* ============================================================
+   TYPOGRAPHY SPEC (design (1).md Section 3)
+   ============================================================ */
+.sky-display {
+  font-size: clamp(2.75rem, 5vw, 3.5rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-heading);
+}
+
+.sky-h2 {
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+.sky-display.text-white,
+.sky-h2.text-white,
+.sky-h3.text-white,
+.text-white .sky-display,
+.text-white .sky-h2,
+.text-white .sky-h3,
+[style*="var(--card-dark)"] h1,
+[style*="var(--card-dark)"] h2,
+[style*="var(--card-dark)"] h3,
+[style*="var(--card-dark)"] .sky-h2,
+[style*="var(--card-dark)"] .sky-h3 {
+  color: #FFFFFF !important;
+}
+
+.sky-h3 {
+  font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+.sky-body {
+  font-size: clamp(0.875rem, 1vw, 0.9375rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--text-body);
+}
+
+.sky-small {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-body);
+}
+
+.sky-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  display: inline-block;
+}
+
+/* ============================================================
+   SUBPAGE WRAPPER
+   ============================================================ */
+.sky-page-wrapper {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  padding-top: 140px;
+  padding-bottom: 96px;
+  color: var(--text-heading);
+}
+
+@media (max-width: 768px) {
+  .sky-page-wrapper {
+    padding-top: 110px;
+    padding-bottom: 64px;
+  }
+}
+
+/* ============================================================
+   SCROLL-TRIGGERED REVEAL (IntersectionObserver driven)
+   ============================================================ */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition:
+    transform 0.4s var(--ease-soft),
+    box-shadow 0.4s var(--ease-soft);
+}
+
+.reveal-stagger > .reveal-child {
+  opacity: 1;
+  transform: none;
+  transition:
+    transform 0.3s var(--ease-soft),
+    box-shadow 0.3s var(--ease-soft);
+}
+
+/* Section-level reveal (used by data-reveal attribute) */
+main > section[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(4px);
+  transition: opacity 560ms var(--ease-soft) var(--reveal-delay, 0ms), transform 560ms var(--ease-soft) var(--reveal-delay, 0ms), filter 560ms var(--ease-soft) var(--reveal-delay, 0ms);
+}
+
+main > section[data-reveal="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ============================================================
+   BUTTONS — Pill Shapes (design (1).md: white/light pills with dark navy text)
+   Key rule: no bright accent CTAs — every button is a white/light glass pill
+   ============================================================ */
+.sky-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--card-dark);
+  color: var(--ink-inverse);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) var(--ease-soft),
+    background-color var(--dur-fast) var(--ease-soft);
+}
+
+.sky-btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-hover);
+  background-color: var(--ink-900);
+}
+
+.sky-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--glass-pill);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-pill);
+  transition:
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) var(--ease-soft),
+    background-color var(--dur-fast) ease;
+}
+
+.sky-btn-glass:hover {
+  transform: scale(1.04);
+  background-color: #FFFFFF;
+  box-shadow: 0 12px 36px rgba(35, 39, 66, 0.16);
+}
+
+/* ============================================================
+   CARDS (design (1).md Section 4 — rounded 20–24px, soft shadow)
+   ============================================================ */
+.sky-card {
+  border-radius: var(--radius-card);
+  padding: clamp(28px, 3.2vw, 38px);
+  transition:
+    transform 260ms var(--ease-soft),
+    box-shadow 260ms var(--ease-soft);
+  position: relative;
+}
+
+.sky-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.sky-card-light {
+  background-color: var(--card-light);
+  color: var(--text-heading);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.sky-card-dark {
+  background-color: var(--card-dark);
+  color: var(--ink-inverse);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 36px -8px rgba(35, 39, 66, 0.28);
+}
+
+.sky-card-dark .sky-h3 { color: #FFFFFF; }
+.sky-card-dark .sky-eyebrow { color: rgba(224, 231, 249, 0.75); }
+.sky-card-dark .sky-body,
+.sky-card-dark .sky-small { color: rgba(224, 231, 249, 0.88); }
+
+.sky-card-white {
+  background-color: var(--bg-card);
+  color: var(--text-heading);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Icon containers (design (1).md Section 6 — alternating lavender square / navy circle) */
+.sky-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.sky-icon-light {
+  background-color: var(--icon-lavender-bg);
+  color: var(--icon-navy);
+}
+
+.sky-icon-dark {
+  background-color: rgba(224, 231, 249, 0.18);
+  color: #FFFFFF;
+}
+
+.sky-icon-navy-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--icon-navy);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   NAV BAR (design (1).md Section 5 — sticky, glass blur backdrop)
+   ============================================================ */
+.sky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 18px 0;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    padding 0.3s ease;
+}
+
+/* Initial hero state — subtle blur to stay legible over sky photo */
+.sky-nav:not(.is-scrolled) {
+  background-color: rgba(45, 49, 87, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sky-nav.is-scrolled {
+  background-color: rgba(245, 244, 252, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 4px 20px rgba(35, 39, 66, 0.06);
+  border-bottom: 1px solid var(--border-hairline);
+  padding: 12px 0;
+}
+
+.sky-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sky-nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.sky-nav.is-scrolled .sky-nav-logo {
+  color: var(--text-heading);
+}
+
+.sky-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.sky-nav-link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color var(--dur-fast) ease;
+}
+
+.sky-nav.is-scrolled .sky-nav-link {
+  color: var(--text-body);
+}
+
+.sky-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.sky-nav.is-scrolled .sky-nav-link:hover {
+  color: var(--text-heading);
+}
+
+.sky-nav-cta {
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  background-color: var(--glass-pill);
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition:
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) ease,
+    background-color 0.3s ease;
+}
+
+.sky-nav.is-scrolled .sky-nav-cta {
+  background-color: var(--badge-bg);
+  color: var(--text-heading);
+  border-color: var(--border-hairline);
+}
+
+.sky-nav-cta:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   HERO SECTION (design (1).md Section 5 — Hero)
+   Full-bleed sky photo, centered text, email input + "Open Account" pill
+   ============================================================ */
+.sky-hero {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: clamp(140px, 14vw, 180px) 0 clamp(72px, 8vw, 100px);
+}
+
+.sky-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sky-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.1);
+  transform-origin: center top;
+}
+
+/* Subtle overlay — keep sky photo vivid (design spec: photo does the emotional work) */
+.sky-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(35, 41, 70, 0.12) 0%,
+    rgba(35, 41, 70, 0.06) 50%,
+    rgba(245, 244, 252, 0.65) 85%,
+    var(--bg-page) 100%
+  );
+  z-index: 1;
+}
+
+.sky-hero-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, rgba(245, 244, 252, 0) 0%, var(--bg-page) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sky-hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sky-hero .sky-display {
+  color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(18, 28, 66, 0.2);
+}
+
+.sky-hero .sky-body {
+  color: var(--hero-text-muted);
+  max-width: 540px;
+}
+
+/* Hero email capture form pill (Credix frosted glass) */
+.sky-form-pill {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 5px 6px 5px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  max-width: 520px;
+  width: 100%;
+  transition: box-shadow var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+.sky-form-pill:focus-within {
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.16);
+}
+
+.sky-form-pill input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  outline: none;
+  min-width: 0;
+}
+
+.sky-form-pill input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.sky-form-pill button {
+  height: 46px;
+  padding: 0 26px;
+  border-radius: var(--radius-pill);
+  background-color: var(--glass-pill);
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition:
+    background-color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) ease;
+}
+
+.sky-form-pill button:hover {
+  background-color: #FFFFFF;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+
+/* ============================================================
+   PILL BADGE (section eyebrow — design (1).md: 11px, 700, uppercase on lavender pill)
+   ============================================================ */
+.sky-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: max-content;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.text-center .sky-pill-badge,
+.sky-pill-badge.mx-auto {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   LOGO MARQUEE (design (1).md Section 5 — infinite scroll, edge fade mask)
+   ============================================================ */
+.sky-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 28px 0;
+  border-top: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border-hairline);
+  position: relative;
+  /* Edge fade mask */
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+.sky-marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 30s linear infinite;
+  gap: 56px;
+  align-items: center;
+}
+
+.sky-marquee-track span,
+.sky-marquee-track .marquee-item {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-body);
+  opacity: 0.5;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sky-marquee-track .marquee-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.4;
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   TABS (feature switcher — design (1).md: underline tabs)
+   ============================================================ */
+.sky-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 5px;
+  border-radius: var(--radius-pill);
+  background-color: var(--card-light);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.sky-tab {
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-body);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+}
+
+.sky-tab:hover { color: var(--text-heading); }
+
+.sky-tab.is-active {
+  background-color: var(--bg-card);
+  color: var(--text-heading);
+  box-shadow: 0 4px 12px rgba(35, 39, 66, 0.08);
+}
+
+/* Underline Tab Navigation */
+.sky-tabs-underline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vw, 40px);
+  border-bottom: 1.5px solid rgba(45, 49, 87, 0.1);
+  padding-bottom: 10px;
+}
+
+.sky-tab-underline-btn {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-body);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 6px 10px;
+  transition: color var(--dur-fast) ease;
+}
+
+.sky-tab-underline-btn:hover { color: var(--text-heading); }
+
+.sky-tab-underline-btn.is-active {
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+.sky-tab-underline-btn.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -11.5px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: var(--card-dark);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   TESTIMONIAL CARDS (design (1).md — #E0E7F9 cards)
+   ============================================================ */
+.sky-testimonial-card {
+  background-color: var(--card-light);
+  border-radius: var(--radius-card);
+  padding: clamp(24px, 3vw, 36px);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) ease;
+}
+
+.sky-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(35, 39, 66, 0.08);
+}
+
+/* Carousel Arrow Button */
+.sky-arrow-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--card-light);
+  color: var(--text-heading);
+  border: 1px solid var(--border-hairline);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-soft), background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.sky-arrow-btn:hover {
+  transform: scale(1.08);
+  background-color: #D3E0FA;
+  box-shadow: 0 6px 16px rgba(35, 39, 66, 0.1);
+}
+
+/* ============================================================
+   SECTIONS (design (1).md Section 4 — 96–120px vertical padding)
+   ============================================================ */
+.sky-section {
+  padding: var(--section-pad) 0;
+}
+
+.sky-section-dark {
+  background-color: var(--card-dark);
+  color: var(--ink-inverse);
+}
+
+.sky-section-dark .sky-h2,
+.sky-section-dark .sky-h3 {
+  color: var(--ink-inverse);
+}
+
+.sky-section-dark .sky-body {
+  color: rgba(224, 231, 249, 0.85);
+}
+
+.sky-section-dark .sky-eyebrow {
+  color: rgba(224, 231, 249, 0.7);
+}
+
+.sky-section-lavender {
+  background-color: var(--card-light);
+}
+
+/* Image frame */
+.sky-img-frame {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+.sky-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-soft);
+}
+
+.sky-img-frame:hover img {
+  transform: scale(1.025);
+}
+
+/* Watch stage with 3D tilt */
+.sky-watch-stage {
+  isolation: isolate;
+  perspective: 1200px;
+}
+
+.sky-watch-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 15% 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(125, 150, 241, 0.56), rgba(125, 150, 241, 0) 68%);
+  filter: blur(15px);
+}
+
+.sky-watch-stage img {
+  transform: rotateY(-12deg) rotateX(4deg) rotateZ(-3deg);
+  filter: drop-shadow(22px 30px 22px rgba(10, 14, 37, 0.38));
+  transition: transform 700ms var(--ease-soft), filter 700ms var(--ease-soft);
+}
+
+.sky-watch-stage:hover img {
+  transform: rotateY(-3deg) rotateX(1deg) rotateZ(-1deg) translateY(-8px);
+  filter: drop-shadow(28px 36px 25px rgba(10, 14, 37, 0.46));
+}
+
+/* ============================================================
+   STAT NUMBERS
+   ============================================================ */
+.sky-stat-number {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.sky-stat-label {
+  font-size: 0.8125rem;
+  color: var(--text-body);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+/* ============================================================
+   FOOTER (design (1).md — newsletter + link columns + socials)
+   Uses light lavender matching the page background
+   ============================================================ */
+.sky-footer {
+  background-color: var(--bg-page);
+  color: var(--text-heading);
+  padding: 72px 0 36px;
+  border-top: 1px solid var(--border-hairline);
+}
+
+.sky-footer a {
+  color: var(--text-body);
+  text-decoration: none;
+  transition: color var(--dur-fast) ease;
+}
+
+.sky-footer a:hover {
+  color: var(--text-heading);
+}
+
+.sky-footer-bottom {
+  border-top: 1px solid var(--border-hairline);
+  padding-top: 24px;
+  margin-top: 48px;
+}
+
+/* ============================================================
+   DASHBOARD STYLES (for inline fintech mockup)
+   ============================================================ */
+.dash-card-blue {
+  background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
+  border-radius: var(--radius-md);
+  padding: 22px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-heading);
+  box-shadow: 0 4px 16px rgba(35, 39, 66, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-widget-light {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dash-subbox {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(35, 39, 66, 0.04);
+}
+
+.dash-recent-tx {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 22px;
+}
+
+.dash-tx-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(35, 39, 66, 0.03);
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.dash-tx-row:hover {
+  background-color: #FBFBFE;
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   MOBILE OVERLAY
+   ============================================================ */
+.sky-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(45, 49, 87, 0.98);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-soft);
+}
+
+.sky-menu-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   RESPONSIVE QUERIES
+   ============================================================ */
+@media (max-width: 1024px) {
+  :root {
+    --container-width: 90%;
+  }
+
+  .sky-nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-width: 92%;
+  }
+
+  .sky-hero {
+    padding: 120px 0 60px;
+  }
+
+  .sky-display {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .sky-h2 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+
+  .sky-form-pill {
+    height: auto;
+    flex-direction: column;
+    border-radius: var(--radius-card);
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .sky-form-pill input {
+    width: 100%;
+    padding: 8px 0;
+    text-align: center;
+  }
+
+  .sky-form-pill button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .reveal,
+  .reveal.is-visible,
+  .reveal-stagger > .reveal-child,
+  .reveal-stagger.is-visible > .reveal-child {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  main > section[data-reveal="pending"],
+  main > section[data-reveal="visible"] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }

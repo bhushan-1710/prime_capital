@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local analysis and scratch dumps
+analyze_*.js
+capture_*.js
+export_*.js
+extract_*.js
+find_*.js
+inspect_*.js
+test_*.js
+*.html
+hark_full.css
+scratch/
